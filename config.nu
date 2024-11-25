@@ -215,10 +215,10 @@ $env.config = {
     }
 
     completions: {
-        case_sensitive: false
+        case_sensitive: true
         quick: true
         partial: true
-        algorithm: "fuzzy"    # prefix or fuzzy
+        algorithm: "prefix"    # prefix or fuzzy
         sort: "smart" # "smart" (alphabetical for prefix matching, fuzzy score for fuzzy matching) or "alphabetical"
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
@@ -909,3 +909,5 @@ source $alias_path
 
 const zoxide_path = [$my_config_dir "zoxide.nu"] | path join
 source $zoxide_path
+
+source ~/.cache/carapace/init.nu
