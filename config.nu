@@ -903,5 +903,9 @@ $env.config = {
 }
 
 const my_config_dir = $nu.config-path | path dirname
+
 const alias_path = [$my_config_dir "aliases.nu"] | path join
 source $alias_path
+
+const zoxide_path = [$my_config_dir "zoxide.nu"] | path join
+source $zoxide_path
