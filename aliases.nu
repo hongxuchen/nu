@@ -1,6 +1,8 @@
+alias sl = ls
+alias l = ls
 alias ll = ls -l
-alias l = ll
-# alias cat = bat
-alias vi = nvim -u NORC
-alias vim = nvim
+alias ldot = ls .*
+alias vi = nvim -u NONE
+alias vim = nvim -u NORC
 alias q = exit
+# alias man = help

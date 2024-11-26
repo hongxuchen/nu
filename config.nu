@@ -167,7 +167,7 @@ $env.config = {
     }
 
     table: {
-        mode: thin # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+        mode: compact # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
         index_mode: auto # "always" show indexes, "never" show indexes, "auto" = show indexes when a table has "index" column
         show_empty: false # show 'empty list' and 'empty record' placeholders for command output
         padding: { left: 1, right: 1 } # a left right padding of each column in a table
