@@ -11,7 +11,10 @@ def "cargo search" [ query: string, --limit=10] {
     | flatten
 }
 
-export def cat [file: string] = {
-    bat -p --paging=never ($file | path expand)
+export def kill-all [name: string] {
+  ps | where name == $name | get pid | each { |it| kill -9 $it }
 }
 
+export def exec-async [commands: string] {
+    bash -c $"nu -c '($commands)' &"
+}

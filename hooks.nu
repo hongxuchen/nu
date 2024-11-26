@@ -2,15 +2,31 @@ let hooks = {
     pre_prompt: [{ null }]
     pre_execution: [{ null }]
     env_change: {
-        PWD: [
-            {|before, after|
+        command_not_found: {
+            condition: {|cmd_name| $nu.os-info.name == "windows"}
+            code: { |cmd_name| (
                 try {
-                    use std
-                    if (ls .git | length) > 0 and (git status -s | str length) > 0 { onefetch e> (std null-device) }
+                    let attrs = (
+                        ftype | find $cmd_name | to text | lines | reduce -f [] { |line, acc|
+                            $line | parse "{type}={path}" | append $acc
+                        } | group-by path | transpose key value | each { |row|
+                            { path: $row.key, types: ($row.value | get type | str join ", ") }
+                        }
+                    )
+                    let len = ($attrs | length)
+
+                    if $len == 0 {
+                        return null
+                    } else {
+                        return ($attrs | table --collapse)
+                    }
                 }
+                )
             }
-            {|before, after|try {print (ls -a | sort-by -i type name | grid -c)}}
-        ]
+        }
+        # PWD: [
+        #     {|before, after|try {print (ls -a | sort-by -i type name | grid -c)}}
+        # ]
     }
     display_output: "if (term size).columns >= 100 { table -e } else { table }"
     command_not_found: []
