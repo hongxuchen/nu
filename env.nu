@@ -9,11 +9,23 @@ def create_left_prompt [] {
         $relative_pwd => ([~ $relative_pwd] | path join)
     }
 
-    let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
-    let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
-    let path_segment = $"($path_color)($dir)(ansi reset)"
+    let ndir = $dir | split row "/" | last 2 | str join "/"
 
-    $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
+    let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
+    let separator_color = (if (is-admin) { ansi green_bold } else { ansi red_bold })
+    let path_segment = $"($path_color)($ndir)(ansi reset)"
+
+    let final_path_segment = $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
+
+    use std null-device
+    let symbolic_ref = git symbolic-ref HEAD err> (null-device)
+    if ($env.LAST_EXIT_CODE != 0) {
+       $final_path_segment 
+    } else {
+       let git_branch = $symbolic_ref | split row "/" | last 1 | get 0
+       $"($git_branch) ($final_path_segment)"
+    }
+
 }
 
 def create_right_prompt [] {
