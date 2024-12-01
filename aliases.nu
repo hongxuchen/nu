@@ -7,4 +7,5 @@ alias vi = nvim -u NONE
 alias vim = nvim -u NORC
 alias q = exit
 alias cat = open --raw
+alias imgcat = wezterm imgcat
 # alias man = help
