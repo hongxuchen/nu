@@ -17,13 +17,12 @@ def create_left_prompt [] {
 
     let final_path_segment = $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
 
-    use std null-device
-    let symbolic_ref = git symbolic-ref HEAD err> (null-device)
-    if ($env.LAST_EXIT_CODE != 0) {
-       $final_path_segment 
+    let git_symbolic_ref_info = (git symbolic-ref HEAD | complete)
+    if ($git_symbolic_ref_info.exit_code != 0) {
+        $final_path_segment
     } else {
-       let git_branch = $symbolic_ref | split row "/" | last 1 | get 0
-       $"($git_branch) ($final_path_segment)"
+        let git_branch = $git_symbolic_ref_info.stdout | str trim | split row "/" | last 1 | get 0
+        $"($git_branch) ($final_path_segment)"
     }
 
 }
@@ -113,6 +112,6 @@ $env.NU_PLUGIN_DIRS = [
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
 
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-mkdir ~/.cache/carapace
-carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+# mkdir ~/.cache/carapace
+# carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
