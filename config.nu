@@ -1,7 +1,3 @@
-# Nushell Config File
-#
-# version = "0.100.0"
-
 let is_linux: bool = ($nu.os-info.name == "linux")
 let is_win: bool = ($nu.os-info.name == "windows")
 

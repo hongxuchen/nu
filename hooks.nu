@@ -3,7 +3,7 @@ let hooks = {
     pre_execution: [{ null }]
     env_change: {
         command_not_found: {
-            condition: {|cmd_name| $nu.os-info.name == "windows"}
+            condition: {|cmd_name| $is_win}
             code: { |cmd_name| (
                 try {
                     let attrs = (

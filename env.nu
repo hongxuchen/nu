@@ -1,7 +1,3 @@
-# Nushell Environment Config File
-#
-# version = "0.100.0"
-
 def create_left_prompt [] {
     let dir = match (do --ignore-shell-errors { $env.PWD | path relative-to $nu.home-path }) {
         null => $env.PWD
@@ -33,7 +29,7 @@ def create_right_prompt [] {
         (ansi reset)
         (ansi magenta)
         (date now | format date '%X') # try to respect user's locale
-        # (date now | format date '%x %X') # try to respect user's locale
+        # (date now | format date '%x %X') # try to respect user's locale
     ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)" |
         str replace --regex --all "([AP]M)" $"(ansi magenta_underline)${1}")
 
@@ -109,9 +105,8 @@ $env.NU_PLUGIN_DIRS = [
 # path add ($env.HOME | path join ".local" "bin")
 # $env.PATH = ($env.PATH | uniq)
 
-# To load from a custom file you can use:
-# source ($nu.default-config-dir | path join 'custom.nu')
-
-# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-# mkdir ~/.cache/carapace
-# carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+$env.CARAPACE_BRIDGES = 'zsh' # optional
+if not ("~/.cache/carapace" | path exists) {
+    mkdir ~/.cache/carapace
+    carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+}
