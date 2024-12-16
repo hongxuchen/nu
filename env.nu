@@ -88,6 +88,8 @@ $env.NU_LIB_DIRS = [
     ($nu.data-dir | path join 'completions') # default home for nushell completions
 ]
 
+$env.EDITOR = "nvim"
+
 # Directories to search for plugin binaries when calling register
 # The default for this is $nu.default-config-dir/plugins
 $env.NU_PLUGIN_DIRS = [

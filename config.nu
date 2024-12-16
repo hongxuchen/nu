@@ -174,7 +174,7 @@ $env.config = {
         }
         header_on_separator: false # show header text on separator/border line
         footer_inheritance: false # render footer in parent table if child is big enough (extended table option)
-        # abbreviated_row_count: 10 # limit data rows from top and bottom after reaching a set point
+        abbreviated_row_count: 100 # limit data rows from top and bottom after reaching a set point
     }
 
     error_style: "fancy" # "fancy" or "plain" for screen reader-friendly error messages
@@ -240,7 +240,7 @@ $env.config = {
     }
 
     color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    footer_mode: 25 # always, never, number_of_rows, auto
+    footer_mode: auto # always, never, "number_of_rows", auto
     float_precision: 2 # the precision for displaying floats in tables
     buffer_editor: null # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.VISUAL and $env.EDITOR
     use_ansi_coloring: true
@@ -303,5 +303,10 @@ $env.config = {
 
 source $"($my_config_dir)/aliases.nu"
 source $"($my_config_dir)/defs.nu"
+if $is_linux {
+    source $"($my_config_dir)/defs_linux.nu"
+} else if $is_win {
+    source $"($my_config_dir)/defs_windows.nu"
+}
 source $"($my_config_dir)/zoxide.nu"
 source ~/.cache/carapace/init.nu
