@@ -28,7 +28,7 @@ let hooks = {
         } else if ($is_linux) {
             use std
             try {
-                command-not-found --no-failure-msg $cmd_name o> (std null-device)
+                /usr/lib/command-not-found --no-failure-msg $cmd_name o> (std null-device)
             }
         }
             )
