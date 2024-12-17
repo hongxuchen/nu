@@ -12,13 +12,6 @@ let keybindings = [
         }
     }
     {
-        name: history_menu
-        modifier: control
-        keycode: char_r
-        mode: [emacs, vi_insert, vi_normal]
-        event: { send: menu name: history_menu }
-    }
-    {
         name: help_menu
         modifier: none
         keycode: f1
@@ -480,8 +473,9 @@ let keybindings = [
         event: [
         {
             send: ExecuteHostCommand
-            cmd: "commandline edit --insert (
+            cmd: "commandline edit --replace (
             history
+                | where exit_status == 0
                 | get command
                 | reverse
                 | uniq
@@ -499,5 +493,15 @@ let keybindings = [
             )"
         }
         ]
+    }
+    {
+        name: fuzzy_file
+        modifier: control
+        keycode: char_t
+        mode: emacs
+        event: {
+        send: executehostcommand
+        cmd: "commandline edit --insert (fzf --layout=reverse)"
+        }
     }
 ]
