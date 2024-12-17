@@ -308,5 +308,9 @@ if $is_linux {
 } else if $is_win {
     source $"($my_config_dir)/defs_windows.nu"
 }
+
+const LOCAL_NU = $"($my_config_dir)/local.nu"
+source $LOCAL_NU
+
 source $"($my_config_dir)/zoxide.nu"
 source ~/.cache/carapace/init.nu
