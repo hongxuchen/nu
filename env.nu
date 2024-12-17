@@ -82,7 +82,7 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins')
 ]
 
-if $is_win {
+if $nu.os-info.name == "windows" {
     $env.HOME = $nu.home-path
 }
 
