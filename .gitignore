@@ -1,3 +1,5 @@
 history.*
 plugin.msgpackz
 local.nu
+ipynb*
+*.ipynb

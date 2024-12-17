@@ -82,6 +82,10 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins')
 ]
 
+if $is_win {
+    $env.HOME = $nu.home-path
+}
+
 $env.CARGO_HOME = ( $env.HOME | path join ".cargo")
 
 use std "path add"
