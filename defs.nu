@@ -38,3 +38,19 @@ export def --env gcd [] {
     }
 
 }
+
+export def "from png" [] {
+    wezterm imgcat
+}
+
+export def "from jpg" [] {
+    wezterm imgcat
+}
+
+export def "from jpeg" [] {
+    wezterm imgcat
+}
+
+export def "in_tmux" [] {
+    "TMUX" in $env
+}
