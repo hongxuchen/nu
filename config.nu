@@ -312,5 +312,6 @@ if $is_linux {
 const LOCAL_NU = $"($my_config_dir)/local.nu"
 source $LOCAL_NU
 
+$env._ZO_EXCLUDE_DIRS = "/run/user/*"
 source $"($my_config_dir)/zoxide.nu"
 source ~/.cache/carapace/init.nu
