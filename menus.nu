@@ -1,6 +1,4 @@
 let menus = [
-        # Configuration for default nushell menus
-        # Note the lack of source parameter
         {
             name: completion_menu
             only_buffer_difference: false
@@ -38,7 +36,7 @@ let menus = [
             type: {
                 layout: description
                 columns: 4
-                col_width: 20     # Optional value. If missing all the screen width is used to calculate column width
+                col_width: 20
                 col_padding: 2
                 selection_rows: 4
                 description_rows: 10
@@ -67,7 +65,7 @@ let menus = [
             source: { |buffer, position|
                 scope commands
                 | where name =~ $buffer
-                | each { |it| {value: $it.name description: $it.usage} }
+                | each { |it| {value: $it.name description: $it.description} }
             }
         }
         {
@@ -93,7 +91,7 @@ let menus = [
         {
             name: zoxide_menu
             only_buffer_difference: true
-            marker: "| "
+            marker: "z "
             type: {
                 layout: columnar
                 page_size: 20
