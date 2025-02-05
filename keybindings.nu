@@ -12,6 +12,13 @@ let keybindings = [
         }
     }
     {
+        name: help_menu
+        modifier: none
+        keycode: f1
+        mode: [emacs, vi_insert, vi_normal]
+        event: { send: menu name: help_menu }
+    }
+    {
         name: commands_menu
         modifier: none
         keycode: f2
@@ -25,12 +32,29 @@ let keybindings = [
         mode: [emacs, vi_insert, vi_normal]
         event: { send: menu name: vars_menu }
     }
-    {
-        name: help_menu
+    { # FIXME: not working
+        name: fuzzy_module
         modifier: none
-        keycode: f1
-        mode: [emacs, vi_insert, vi_normal]
-        event: { send: menu name: help_menu }
+        keycode: f4
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: '
+                commandline edit --replace "use "
+                commandline edit --insert (
+                    $env.NU_LIB_DIRS
+                    | each {|dir|
+                        ls ($dir | path join "**" "*.nu")
+                        | get name
+                        | str replace $dir ""
+                        | str trim -c "/"
+                    }
+                    | flatten
+                    | input list --fuzzy
+                        $"Please choose a (ansi magenta)module(ansi reset) to (ansi cyan_underline)load(ansi reset):"
+                )
+            '
+        }
     }
     {
         name: completion_previous_menu

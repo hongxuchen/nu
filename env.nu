@@ -72,8 +72,9 @@ $env.ENV_CONVERSIONS = {
 # Directories to search for scripts when calling source or use
 # The default for this is $nu.default-config-dir/scripts
 $env.NU_LIB_DIRS = [
-    ($nu.default-config-dir | path join 'scripts') # add <nushell-config-dir>/scripts
-    ($nu.data-dir | path join 'completions') # default home for nushell completions
+    ($nu.default-config-dir | path join 'scripts' 'modules')
+    ($nu.default-config-dir | path join 'scripts' 'completions')
+    ($nu.default-config-dir | path join 'scripts' 'hooks')
 ]
 
 $env.EDITOR = "nvim"
