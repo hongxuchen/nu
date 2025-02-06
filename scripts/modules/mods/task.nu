@@ -1,3 +1,49 @@
+# https://www.nushell.sh/book/background_task.html
+
+# * How can I pass data to a background task?
+# 
+# You can use environment variables, since they
+# are inherited from the parent when spawning a process.
+# 
+# ```nu
+# $env.FOO = 123
+# 
+# task spawn {
+#   echo $env.FOO
+# }
+# ```
+# 
+# If you want to pass serialized data, you can do this:
+# 
+# ```nu
+# let foo = { a: 1 b: 2 c: 3 }
+# 
+# with-env { FOO: ($foo | to json) } {
+#   task spawn {
+#     let foo = ($env.FOO | from json)
+# 
+#     echo $foo
+#   }
+# }
+# ```
+# 
+# * How can I reuse custom commands in a background task?
+# 
+# You can define these commands in a separate module, like so:
+# 
+# ```nu
+# # --- in foo.nu ---
+# export def bar [] { echo bar }
+# 
+# # --- in main.nu ---
+# task spawn {
+#   use foo.nu
+# 
+#   foo bar
+# }
+# ```
+
+
 # Spawn a task to run in the background, even when the shell is closed.
 #
 # Note that a fresh Nushell interpreter is spawned to execute the

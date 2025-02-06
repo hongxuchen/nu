@@ -33,7 +33,7 @@ let keybindings = [
         event: {
             send: executehostcommand
             cmd: '
-                commandline edit --replace "use "
+                commandline edit --replace "source "
                 commandline edit --insert (
                     $env.NU_LIB_DIRS
                     | each {|dir|
@@ -41,6 +41,7 @@ let keybindings = [
                         | get name
                         | str replace $dir ""
                         | str trim -c "/"
+                        | str trim -c "\\"
                     }
                     | flatten
                     | input list --fuzzy

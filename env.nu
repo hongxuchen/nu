@@ -71,7 +71,7 @@ $env.ENV_CONVERSIONS = {
 $env.NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'scripts' 'modules')
     ($nu.default-config-dir | path join 'scripts' 'completions')
-    ($nu.default-config-dir | path join 'scripts' 'hooks')
+    # ($nu.default-config-dir | path join 'scripts' 'hooks')
 ]
 
 $env.EDITOR = "nvim"

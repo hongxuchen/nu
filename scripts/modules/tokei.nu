@@ -1,10 +1,8 @@
-# This script requires that `tokei` be installed and available!
-
 # Count lines of code in a project.
-export def main [
+export def tokei [
     ...rest # args to pass to tokei
 ] {
-    tokei -o json ...$rest |
+    ^tokei -o json ...$rest |
     from json |
     transpose |
     rename lang lines |
