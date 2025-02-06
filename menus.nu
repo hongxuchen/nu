@@ -85,4 +85,25 @@ let menus = [
                 | parse -r '(?P<description>[0-9]+) (?P<value>.+)'
             }
         }
+        {
+            name: abbr_menu
+            only_buffer_difference: false
+            marker: "👀 "
+            type: {
+                layout: columnar
+                columns: 1
+                col_width: 20
+                col_padding: 2
+            }
+            style: {
+                text: green
+                selected_text: green_reverse
+                description_text: yellow
+            }
+            source: { |buffer, position|
+                scope aliases
+                | where name == $buffer
+                | each { |elt| {value: $elt.expansion }}
+            }
+        }
     ]

@@ -94,9 +94,3 @@ path add ($env.HOME | path join ".bin")
 path add ($env.HOME | path join ".fzf/bin")
 path add ($env.HOME | path join ".local/share/nvim/mason/bin")
 $env.PATH = ($env.PATH | uniq)
-
-$env.CARAPACE_BRIDGES = 'zsh'
-if not ("~/.cache/carapace" | path exists) {
-    mkdir ~/.cache/carapace
-    carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
-}

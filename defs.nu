@@ -1,4 +1,4 @@
-def "cargo search" [ query: string, --limit=10] {
+def "cargo-search" [ query: string, --limit=10] {
     ^cargo search $query --limit $limit --registry crates-io
     | lines
     | each {

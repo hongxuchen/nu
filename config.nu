@@ -302,8 +302,13 @@ if $is_linux {
     source $"($my_config_dir)/defs_linux.nu"
     source $"($my_config_dir)/fish_completer.nu"
 } else if $is_win {
-#??? file should exist???
     source $"($my_config_dir)/defs_windows.nu"
+    # $env.CARAPACE_BRIDGES = 'zsh'
+    if not ("~/.cache/carapace" | path exists) {
+        mkdir ~/.cache/carapace
+        carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+    }
+    #??? file should exist???
     source ~/.cache/carapace/init.nu
 }
 

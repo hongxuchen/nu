@@ -76,6 +76,16 @@ let keybindings = [
         }
     }
     {
+        name: abbr_expand
+        modifier: control
+        keycode: space
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+            { send: menu name: abbr_menu }
+            { edit: insertchar, value: ' '}
+        ]
+    }
+    {
         name: escape
         modifier: none
         keycode: escape
