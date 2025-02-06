@@ -78,12 +78,11 @@ let keybindings = [
     }
     {
         name: abbr_expand
-        modifier: control
-        keycode: space
+        modifier: none
+        keycode: f4
         mode: [emacs, vi_normal, vi_insert]
         event: [
             { send: menu name: abbr_menu }
-            { edit: insertchar, value: ' '}
         ]
     }
     {
