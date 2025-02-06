@@ -5,8 +5,8 @@ let menus = [
             marker: "| "
             type: {
                 layout: columnar
-                columns: 4
-                col_width: 20     # Optional value. If missing all the screen width is used to calculate column width
+                columns: 5
+                col_width: 20
                 col_padding: 2
             }
             style: {
@@ -35,37 +35,16 @@ let menus = [
             marker: "? "
             type: {
                 layout: description
-                columns: 4
+                columns: 5
                 col_width: 20
                 col_padding: 2
-                selection_rows: 4
+                selection_rows: 5
                 description_rows: 10
             }
             style: {
                 text: green
                 selected_text: green_reverse
                 description_text: yellow
-            }
-        }
-        {
-            name: commands_menu
-            only_buffer_difference: false
-            marker: "# "
-            type: {
-                layout: columnar
-                columns: 4
-                col_width: 20
-                col_padding: 2
-            }
-            style: {
-                text: green
-                selected_text: green_reverse
-                description_text: yellow
-            }
-            source: { |buffer, position|
-                scope commands
-                | where name =~ $buffer
-                | each { |it| {value: $it.name description: $it.description} }
             }
         }
         {
@@ -90,8 +69,8 @@ let menus = [
         }
         {
             name: zoxide_menu
-            only_buffer_difference: true
-            marker: "z "
+            only_buffer_difference: false # set to true will auto select prefix
+            marker: "| "
             type: {
                 layout: columnar
                 page_size: 20

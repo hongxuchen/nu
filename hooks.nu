@@ -2,9 +2,19 @@ let hooks = {
     pre_prompt: [{ null }]
     pre_execution: [{ null }]
     env_change: {
-        # PWD: [
-        #     {|before, after|try {print (ls -a | sort-by -i type name | grid -c)}}
-        # ]
+        PWD: [
+                {
+                    condition: {|_, after| ($after | path join 'Cargo.lock' | path exists) }
+                    code: {
+                        $env.PATH = (
+                            $env.PATH
+                                | prepend ($env.PWD | path join 'target/debug')
+                                | prepend ($env.PWD | path join 'target/release')
+                                | uniq
+                            )
+                    }
+                }
+        ]
     }
     command_not_found: {
         code: { |cmd_name| (

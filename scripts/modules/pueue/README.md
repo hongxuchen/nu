@@ -63,6 +63,3 @@ task spawn {
   foo bar
 }
 ```
-## Troubleshooting
-
-- On some setups (e.g. NixOS with `nu` installed as a binary in user's `$HOME`), `sh` (which `pueue` delegates tasks to run) might fail to find `nu` in the `$PATH`. In this case hard-coding the location of your nu binary in the `task spawn` function definition in `task.nu` can solve the issue.

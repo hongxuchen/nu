@@ -19,23 +19,16 @@ let keybindings = [
         event: { send: menu name: help_menu }
     }
     {
-        name: commands_menu
+        name: vars_menu
         modifier: none
         keycode: f2
         mode: [emacs, vi_insert, vi_normal]
-        event: { send: menu name: commands_menu }
-    }
-    {
-        name: vars_menu
-        modifier: none
-        keycode: f3
-        mode: [emacs, vi_insert, vi_normal]
         event: { send: menu name: vars_menu }
     }
-    { # FIXME: not working
+    {
         name: fuzzy_module
         modifier: none
-        keycode: f4
+        keycode: f3
         mode: [emacs, vi_normal, vi_insert]
         event: {
             send: executehostcommand
@@ -44,7 +37,7 @@ let keybindings = [
                 commandline edit --insert (
                     $env.NU_LIB_DIRS
                     | each {|dir|
-                        ls ($dir | path join "**" "*.nu")
+                        ls ($dir | path join "**" "*.nu" | into glob)
                         | get name
                         | str replace $dir ""
                         | str trim -c "/"

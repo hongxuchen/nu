@@ -1,3 +1,4 @@
+## https://github.com/JalonWong/nushell-prompt
 # $env.PROMPT_INDICATOR = {|| "" }
 #
 # $env.PROMPT_COMMAND = {|| full-left-prompt }

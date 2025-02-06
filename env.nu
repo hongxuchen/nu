@@ -24,14 +24,11 @@ def create_left_prompt [] {
 }
 
 def create_right_prompt [] {
-    # create a right prompt in magenta with green separators and am/pm underlined
     let time_segment = ([
         (ansi reset)
         (ansi magenta)
         (date now | format date '%X') # try to respect user's locale
-        # (date now | format date '%x %X') # try to respect user's locale
-    ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)" |
-        str replace --regex --all "([AP]M)" $"(ansi magenta_underline)${1}")
+    ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)")
 
     let last_exit_code = if ($env.LAST_EXIT_CODE != 0) {([
         (ansi rb)
@@ -96,7 +93,7 @@ path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".bin")
 path add ($env.HOME | path join ".fzf/bin")
 path add ($env.HOME | path join ".local/share/nvim/mason/bin")
-# $env.PATH = ($env.PATH | uniq)
+$env.PATH = ($env.PATH | uniq)
 
 $env.CARAPACE_BRIDGES = 'zsh'
 if not ("~/.cache/carapace" | path exists) {

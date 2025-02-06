@@ -144,11 +144,6 @@ let light_theme = {
     shape_raw_string: light_purple
 }
 
-# External completer example
-# let carapace_completer = {|spans|
-#     carapace $spans.0 nushell ...$spans | from json
-# }
-
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
@@ -216,14 +211,14 @@ $env.config = {
 
     completions: {
         case_sensitive: true
-        quick: true
-        partial: true
-        algorithm: "fuzzy"    # prefix or fuzzy
+        quick: false # don't use "quick selection", only scroll or type more words
+        partial: true # https://github.com/nushell/nushell/issues/2135
+        algorithm: "prefix"    # prefix or fuzzy
         sort: "smart" # "smart" (alphabetical for prefix matching, fuzzy score for fuzzy matching) or "alphabetical"
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
-            max_results: 20 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            max_results: 30 # setting it lower can improve completion performance at the cost of omitting some options
+            completer: null # NOTE: this is set afterwards
         }
         use_ls_colors: true # set this to true to enable file/path/directory completions using LS_COLORS
     }
@@ -305,8 +300,11 @@ source $"($my_config_dir)/aliases.nu"
 source $"($my_config_dir)/defs.nu"
 if $is_linux {
     source $"($my_config_dir)/defs_linux.nu"
+    source $"($my_config_dir)/fish_completer.nu"
 } else if $is_win {
+#??? file should exist???
     source $"($my_config_dir)/defs_windows.nu"
+    source ~/.cache/carapace/init.nu
 }
 
 const LOCAL_NU = $"($my_config_dir)/local.nu"
@@ -314,4 +312,3 @@ source $LOCAL_NU
 
 $env._ZO_EXCLUDE_DIRS = "/run/user/*"
 source $"($my_config_dir)/zoxide.nu"
-source ~/.cache/carapace/init.nu
