@@ -1,0 +1,3 @@
+[submodule "scripts/plugins/nu-history-tools"]
+	path = scripts/plugins/nu-history-tools
+	url = git@github.com:nushell-prophet/nu-history-tools.git
