@@ -1,6 +1,7 @@
 # Convert from contents of /proc/cpuinfo to structured data
-export def "from cpuinfo" [] {
-    lines
+export def "from cpuinfo" [fpath] {
+    open $fpath
+    | lines
     | split list ''
     | each {
         split column ':'

@@ -83,6 +83,7 @@ let keybindings = [
         mode: [emacs, vi_normal, vi_insert]
         event: [
             { send: menu name: abbr_menu }
+            # { edit: insertstring, value: ""}
         ]
     }
     {
